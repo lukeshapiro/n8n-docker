@@ -1,0 +1,35 @@
+# fly.toml app configuration file generated for n8n-docker-young-waterfall-3503 on 2024-12-19T16:10:56-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'n8n-docker'
+primary_region = 'sea'
+
+[env]
+  N8N_VERSION = '1.7.2'
+  DOMAIN_NAME = 'fly.dev'
+  SUBDOMAIN = 'n8n-docker'
+  N8N_BASIC_AUTH_ACTIVE = 'true'
+  N8N_BASIC_AUTH_USER = 'chasegg'
+  N8N_BASIC_AUTH_PASSWORD = 'passwordgg'
+
+[build]
+
+[http_service]
+  internal_port = 5678
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ['app']
+
+[[vm]]
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[mounts]
+  source = "n8n_data"
+  destination = "/home/node/.n8n"
+  initial_size = "2gb"
